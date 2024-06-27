@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="consumptioncalculatorform">
+        <input type="hidden" id="prdcoverage" value="1.5">
+        <input type="hidden" id="prdpacksize" value="2">
+
+        <h4>Tile Dimensions</h4>
+        <fieldset>
+            <label for="inp_TileLength">Length (mm)</label>
+            <input type="number" id="inp_TileLength" name="inp_TileLength" value="" min="1">
+        </fieldset>
+        <fieldset>
+            <label for="inp_TileBreadth">Breadth (mm)</label>
+            <input type="number" id="inp_TileBreadth" name="inp_TileBreadth" value="" min="1">
+        </fieldset>
+
+        <h4>Joint Dimensions</h4>
+        <fieldset>
+            <label for="inp_TileWidth">Width (mm)</label>
+            <input type="number" id="inp_TileWidth" name="inp_TileWidth" value="" min="1">
+        </fieldset>
+        <fieldset>
+            <label for="inp_TileDepth">Depth (mm)</label>
+            <input type="number" id="inp_TileDepth" name="inp_TileDepth" value="" min="1">
+        </fieldset>
+
+        <button id="calculate">Calculate</button>
+        <h4><span id="resultpacksize"></span></h4>
+        <h2><span id="resultsquaremtr"></span></h2>
+
+        <fieldset>
+            <label for="projectArea">Project Area (m2)</label>
+            <input type="number" id="projectArea" name="projectArea" value="" min="1">
+        </fieldset>
+
+        <button id="yourareacalculate">Calculate</button>
+        <h2><span id="resultnobags"></span></h2>
+    </form>
+
+    <script>
+        function groutscalculate(){
+            var tileLength = jQuery('#inp_TileLength').val();
+            var tileBreadth = jQuery('#inp_TileBreadth').val();
+            var jointWidth = jQuery('#inp_TileWidth').val();
+            var jointDepth = jQuery('#inp_TileDepth').val();
+            var prdcoverage = 1.5;
+            var prdpacksize = 2;
+            var projectArea = jQuery('#projectArea').val();
+        
+            var tileJointDimensonsMulitplication = ((parseInt(tileLength) + parseInt(tileBreadth)) * jointWidth) * jointDepth;
+            var groutCoverage = tileJointDimensonsMulitplication * prdcoverage;
+            var groutCoverageDividedByTileDimensions = parseInt(groutCoverage) / (parseInt(tileLength) * parseInt(tileBreadth));
+            var calc_ResultKg = prdpacksize / groutCoverageDividedByTileDimensions;
+            var calc_NoBags = projectArea / calc_ResultKg;
+        
+            jQuery('.resultpacksize').text(prdpacksize);
+            jQuery('#resultsquaremtr').text(calc_ResultKg.toFixed(0));
+        
+            if(projectArea){
+                jQuery('#resultnobags').text(Math.ceil(calc_NoBags));
+            }
+        }
+        jQuery( "#calculate" ).click(function() {
+            groutscalculate();
+            return false;
+        });	
+        jQuery( "#yourareacalculate" ).click(function() {
+            groutscalculate();
+            return false;
+        });
+        </script>
+</body>
+</html>
