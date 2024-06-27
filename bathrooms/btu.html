@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heating Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="heatingcalculatorform">
+        <h4>Bathroom Dimensions</h4>
+        <fieldset>
+            <label for="inp_Length">Length (meters)</label>
+            <input type="number" id="inp_Length" name="inp_Length" value="" min="0.1" step="0.01" required>
+        </fieldset>
+        <fieldset>
+            <label for="inp_Width">Width (meters)</label>
+            <input type="number" id="inp_Width" name="inp_Width" value="" min="0.1" step="0.01" required>
+        </fieldset>
+        <fieldset>
+            <label for="inp_Height">Height (meters)</label>
+            <input type="number" id="inp_Height" name="inp_Height" value="" min="0.1" step="0.01" required>
+        </fieldset>
+        <fieldset>
+            <label for="inp_CurrentTemp">Current Temperature (°C)</label>
+            <input type="number" id="inp_CurrentTemp" name="inp_CurrentTemp" value="" required>
+        </fieldset>
+        <fieldset>
+            <label for="inp_DesiredTemp">Desired Temperature (°C)</label>
+            <input type="number" id="inp_DesiredTemp" name="inp_DesiredTemp" value="" required>
+        </fieldset>
+        <button type="button" id="calculateHeating">Calculate</button>
+        <h2>Watts Required: <span id="resultWatts"></span></h2>
+    </form>
+
+    <script>
+        function calculateHeating(){
+            var length = parseFloat(jQuery('#inp_Length').val());
+            var width = parseFloat(jQuery('#inp_Width').val());
+            var height = parseFloat(jQuery('#inp_Height').val());
+            var currentTemp = parseFloat(jQuery('#inp_CurrentTemp').val());
+            var desiredTemp = parseFloat(jQuery('#inp_DesiredTemp').val());
+
+            var volume = length * width * height; // Volume of the room in cubic meters
+            var tempDifference = desiredTemp - currentTemp; // Temperature difference in degrees Celsius
+
+            // Heating power required in watts can be estimated using the formula:
+            // Power (W) = Volume (m^3) * Temperature difference (°C) * 60
+            // The constant 60 is an approximation for heat loss and the efficiency factor.
+            var wattsRequired = volume * tempDifference * 60;
+
+            // Display the result
+            jQuery('#resultWatts').text(wattsRequired.toFixed(2));
+        }
+
+        jQuery("#calculateHeating").click(function() {
+            calculateHeating();
+        });
+    </script>
+</body>
+</html>
