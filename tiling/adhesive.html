@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="consumptioncalculatorform">
+        <input type="hidden" id="prdcoverage" value="1.3">
+        <input type="hidden" id="prdpacksize" value="20">
+
+        <fieldset>
+            <label for="projectArea">Area to be covered in m2</label>
+            <input type="number" id="projectArea" name="projectArea" value="" min="1">
+        </fieldset>
+
+        <fieldset>
+            <label for="BedThickness">Bed thickness</label>
+            <select id="BedThickness">
+                <option></option>
+                <option value="3">3mm</option>
+                <option value="4">4mm</option>
+                <option value="5">5mm</option>
+                <option value="6">6mm</option>
+                <option value="7">7mm</option>
+                <option value="8">8mm</option>
+            </select>
+        </fieldset>
+
+        <button id="yourareacalculate">Calculate</button>
+        <div id="LevellingResults">
+            <h4>Results</h4>
+            <h2><span id="resultnobags"></span></h2>
+        </div>
+    </form>
+
+    <script>
+    // function groutscalculate(){
+    // 	var prdcoverage = jQuery('#prdcoverage').val();
+    // 	var prdpacksize = jQuery('#prdpacksize').val();
+    // 	var projectArea = jQuery('#projectArea').val();
+    // 	var BedThickness = jQuery('#BedThickness').val();
+    
+    // 	var calc_ResultKg = projectArea * prdcoverage;;
+    // 	var calc_NoBags = projectArea / calc_ResultKg;
+    
+    // 	var kgRequired = Math.ceil(projectArea * prdcoverage);
+    //     var unitsRequired = Math.ceil((projectArea * prdcoverage / prdpacksize));	
+    
+    //     jQuery('#LevellingResults').css('display', 'block');
+    // 	jQuery('.resultpacksize').text(prdpacksize);
+    // 	jQuery('#resultsquaremtr').text(kgRequired);
+    
+    // 	if(projectArea){
+    // 		jQuery('#resultnobags').text(unitsRequired);
+    // 	}
+    // }
+    function groutscalculate(){
+        var prdcoverage = jQuery('#prdcoverage').val();
+        var prdpacksize = jQuery('#prdpacksize').val();
+        var projectArea = jQuery('#projectArea').val();
+        var BedThickness = jQuery('#BedThickness').val();
+    
+        var AREACOVER = jQuery('#projectArea').val();
+        var KGRequired = Math.round((prdcoverage * BedThickness * AREACOVER) * 10) / 10;	
+    
+        //CalcForm.Fc is used in the calculation for the number of units required = first value option * bed thickness * area to be covered
+        var Fc = prdcoverage * BedThickness * AREACOVER; 
+        
+        var UnitsRequired =((Fc / prdpacksize) * 10) / 10;
+        
+        //$('#UnitsRequired').text(UnitsRequired);	
+    
+        jQuery('#LevellingResults').css('display', 'block');   
+        if(UnitsRequired){
+            jQuery('#resultnobags').text(Math.ceil(UnitsRequired));
+            //jQuery('#resultnobags').text(Math.round(UnitsRequired));
+            
+        }
+        console.log(UnitsRequired);
+    }
+    jQuery( "#yourareacalculate" ).click(function() {
+        groutscalculate();
+        return false;
+    });
+    </script>
+
+</body>
+</html>
