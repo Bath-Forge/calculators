@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="consumptioncalculatorform">
+        <fieldset>
+            <label for="projectArea">Area to be covered in m2</label>
+            <input type="number" id="projectArea" name="projectArea" value="" min="1">
+        </fieldset>
+
+        <fieldset>
+            <label for="tileLocation">Where are you tiling?</label>
+            <select id="tileLocation">
+                <option></option>
+                <option value="Wall">Wall</option>
+                <option value="Floor">Floor</option>
+            </select>
+        </fieldset>
+
+        <button id="calculate">Calculate</button>
+        <div id="WaterproofResults">
+            <h4>Results</h4>
+            <h2><span id="resultnobags"></span></h2>
+        </div>
+    </form>
+
+    <script>
+    function waterproofcalculate() {
+        var tileLocation = jQuery('#tileLocation').val();
+        var projectArea = jQuery('#projectArea').val();
+
+        projectArea = parseFloat(projectArea);
+
+        var thickness;
+
+        if (tileLocation === 'Wall') {
+            thickness = '6';
+        } else {
+            thickness = '3';
+        }
+
+        var result = Math.ceil(projectArea / thickness);
+
+        jQuery('#resultnobags').text(result);
+    }
+    jQuery( "#calculate" ).click(function() {
+        waterproofcalculate();
+        return false;
+    });
+    </script>
+
+</body>
+</html>
