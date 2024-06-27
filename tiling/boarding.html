@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="consumptioncalculatorform">
+        <h4>Board Dimensions</h4>
+        <fieldset>
+            <label for="inp_BoardLength">Length (mm)</label>
+            <input type="number" id="inp_BoardLength" name="inp_BoardLength" value="" min="1">
+        </fieldset>
+        <fieldset>
+            <label for="inp_BoardBreadth">Width (mm)</label>
+            <input type="number" id="inp_BoardBreadth" name="inp_BoardBreadth" value="" min="1">
+        </fieldset>
+
+        <fieldset>
+            <label for="projectArea">Project Area (m2)</label>
+            <input type="number" id="projectArea" name="projectArea" value="" min="1">
+        </fieldset>
+
+        <button id="yourareacalculate">Calculate</button>
+        <h2><span id="resultnoboards"></span></h2>
+    </form>
+
+    <script>
+        function boardscalculate(){
+            var boardLength = jQuery('#inp_BoardLength').val();
+            var boardBreadth = jQuery('#inp_BoardBreadth').val();
+            var projectArea = jQuery('#projectArea').val();
+
+            boardLength = parseFloat(boardLength) / 1000;
+            boardBreadth = parseFloat(boardBreadth) / 1000;
+            projectArea = parseFloat(projectArea);
+        
+            var boardArea = boardBreadth * boardLength;
+            var totalBoards = Math.ceil(projectArea / boardArea);
+
+            jQuery('#resultnoboards').text(totalBoards);
+        }
+        jQuery( "#yourareacalculate" ).click(function() {
+            boardscalculate();
+            return false;
+        });
+    </script>
+</body>
+</html>
