@@ -1,28 +1,64 @@
 <!DOCTYPE html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <form id="consumptioncalculatorform">
-        <input type="hidden" id="prdcoverage" value="1.65">
-        <input type="hidden" id="prdpacksize" value="25">
+    <div class="container pt-4 pb-4">
+        <form id="consumptioncalculatorform">
+            <input type="hidden" id="prdcoverage" value="1.65">
+            <input type="hidden" id="prdpacksize" value="25">
 
-        <fieldset>
-            <label for="projectArea">Area to be covered in m2</label>
-            <input type="number" id="projectArea" name="projectArea" value="" min="1">
-        </fieldset>
+            <div class="row">
+                <div class="col-6 mb-2 ps-1 pe-1">
+                    <div class="card shadow-sm h100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center input-group">
+                                <h5>Depth</h5>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" id="inp_TileDepth" value="" min="1">
+                                    <span class="input-group-text">mm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <fieldset>
-            <label for="inp_TileDepth">Depth (mm)</label>
-            <input type="number" id="inp_TileDepth" value="" min="1">
-        </fieldset>
-
-        <button id="yourareacalculate">Calculate</button>
-        <div id="LevellingResults">
-            <h4>Results</h4>
-            <h2><span id="levellingBagsRequired"></span></h2>
-        </div>
-    </form>
+                <div class="col-6 mb-2 ps-1 pe-1">
+                    <div class="card shadow-sm h100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center input-group">
+                                <h5>Area to be covered</h5>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" id="projectArea" value="" min="1">
+                                    <span class="input-group-text">m2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-2 ps-1 pe-1">
+                    <div class="row gx-0">
+                        <button id="yourareacalculate" class="btn btn-primary">Calculate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row pe-1 ps-1" id="LevellingResults" style="display:none;">
+                <div class="card shadow-sm h100 py-2">
+                    <div class="card-body">
+                        <div class="row gx-0">
+                            <div>
+                                <h5>Result</h5>
+                                <h6>Your project requires <span id="levellingBagsRequired"></span> bags.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <script>
     function groutscalculate(){
